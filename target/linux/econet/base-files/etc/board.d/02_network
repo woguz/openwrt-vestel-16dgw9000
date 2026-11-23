@@ -7,7 +7,7 @@ econet_setup_interfaces()
 	local board="$1"
 
 	case "$board" in
-	tplink,archer-c5v)
+	tplink,archer-c5v|vestel,16dgw9000)
 		# external MT7530 driven as a VLAN-aware switch by econet-eth:
 		#   LAN ports -> VID 1  (eth0.1)
 		#   WAN port  -> VID 35 (eth0.35, tagged) for ISP PPPoE-over-VLAN
