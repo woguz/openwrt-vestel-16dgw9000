@@ -1,0 +1,84 @@
+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+/dts-v1/;
+#include "en751221.dtsi"
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/leds/common.h>
+
+/ {
+	model = "Vestel 16DGW9000";
+	compatible = "vestel,16dgw9000", "econet,en751221";
+
+	memory@0 {
+		device_type = "memory";
+		reg = <0x00000000 0x8000000>;
+	};
+
+	chosen {
+		stdout-path = "/serial@1fbf0000:115200";
+		linux,usable-memory-range = <0x00020000 0x07fe0000>;
+		bootargs = "ubi.mtd=ubi";
+	};
+};
+
+&nand {
+	status = "okay";
+
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		partition@0 {
+			label = "tcboot";
+			reg = <0x0 0x40000>;
+			read-only;
+		};
+
+		partition@40000 {
+			label = "U-Boot";
+			reg = <0x40000 0xc0000>;
+			read-only;
+		};
+
+		partition@100000 {
+			label = "ubi";
+			reg = <0x100000 0x7f00000>;
+		};
+	};
+};
+
+&gmac0 {
+	status = "okay";
+};
+
+&ethernet {
+	econet,mt7530-vlan-split;
+	econet,mt7530-cpu-port = <6>;
+	econet,mt7530-lan-ports = <0 1 2 3>;
+	econet,mt7530-lan-vid = <1>;
+	econet,mt7530-wan-port = <4>;
+	econet,mt7530-wan-vid = <35>;
+};
+
+&pcie0 {
+	status = "okay";
+};
+
+&pcie1 {
+	status = "okay";
+};
+
+&slot0 {
+	wifi@0,0 {
+		compatible = "mediatek,mt76";
+		reg = <0x0000 0 0 0 0>;
+	};
+};
+
+&slot1 {
+	wifi@0,0 {
+		compatible = "mediatek,mt76";
+		reg = <0x0000 0 0 0 0>;
+	};
+};
