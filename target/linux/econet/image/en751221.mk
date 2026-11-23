@@ -127,3 +127,18 @@ define Device/tplink_archer-c5v
   IMAGE/factory.bin := append-kernel | pad-to 4194304 | append-ubi
 endef
 TARGET_DEVICES += tplink_archer-c5v
+
+define Device/vestel_16dgw9000
+  DEVICE_VENDOR := Vestel
+  DEVICE_MODEL := 16DGW9000
+  DEVICE_DTS := en751221_vestel_16dgw9000
+  NAND_SIZE := 128m
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt7615e kmod-mt7663-firmware-ap kmod-8021q kmod-usb3
+  KERNEL := kernel-bin | append-dtb | lzma | uImage lzma
+  KERNEL_INITRAMFS := kernel-bin | append-dtb
+  IMAGES := sysupgrade.bin
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += vestel_16dgw9000
