@@ -41,6 +41,7 @@ jobs:
           CONFIG_TARGET_INITRAMFS_COMPRESSION_NONE=y
           CONFIG_PACKAGE_luci=y
           CONFIG_PACKAGE_luci-ssl=y
+          CONFIG_PACKAGE_wpad-basic-mbedtls=y
           CONFIG_PACKAGE_kmod-mt7603=y
           CONFIG_PACKAGE_kmod-mt7615e=y
           CONFIG_PACKAGE_kmod-mt7663-firmware-ap=y
@@ -63,8 +64,8 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: vestel-v1.0
-          name: Vestel 16DGW9000 OpenWrt
+          tag_name: vestel-v1.1
+          name: Vestel 16DGW9000 OpenWrt v1.1
           files: |
             bin/targets/econet/en751221/*vestel*
             bin/targets/econet/en751221/*initramfs*
